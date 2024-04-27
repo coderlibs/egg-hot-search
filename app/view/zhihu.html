@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css">
+    <title>微博新闻</title>
+    <style>
+        .title{
+            display: inline-block;
+            max-width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .panel-heading a{
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div style="text-align: center;margin: 20px;font-weight: 600;">
+                    知乎热搜
+                </div>
+                {% for item in list%}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span style="float: left;">{{item.rank}}.</span>
+                        <a class="text-center title" href="{{item.url}}" target="_blank">{{item.keyword}}</a>
+                        <span style="float: right;color: red;">{{item.hotValue}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

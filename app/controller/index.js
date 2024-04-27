@@ -5,6 +5,8 @@ class IndexController extends Controller {
     let list = [
       { link: "/weibo", name: "微博热搜" },
       { link: "/baidu", name: "百度热搜" },
+      { link: "/toutiao", name: "头条热搜" },
+      { link: "/zhihu", name: "知乎热搜" },
     ];
     await ctx.render("index", { list });
   }

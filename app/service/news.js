@@ -1,5 +1,6 @@
 const weiboHandle = require("../util/weibo");
 const baiduHandle = require("../util/baidu");
+const zhihuHandle = require("../util/zhihu");
 const { Service } = require("egg");
 class NewsService extends Service {
   // 微博爬虫
@@ -31,6 +32,40 @@ class NewsService extends Service {
       dataType: "text",
     });
     return baiduHandle.call(this, result.data);
+  }
+  // 头条爬虫
+  async toutiao() {
+    const { ctx } = this;
+    const { toutiaoNewsListUrl } = this.config.news;
+    const result = await ctx.curl(toutiaoNewsListUrl, {
+      method: "GET",
+      dataType: "json",
+    });
+    let list = result.data.data;
+    let arr = []
+    list.forEach((el,index) => {
+      arr.push({
+        rank: index + 1,
+        keyword: el.Title,
+        url:  el.Url,
+        hotValue: el.HotValue,
+      });
+    });
+    return arr;
+  }
+  // 知乎爬虫
+  async zhihu() {
+    const { ctx } = this;
+    const { zhihuNewListUrl } = this.config.news;
+    const result = await ctx.curl(zhihuNewListUrl, {
+      method: "GET",
+      headers: {
+        cookie:
+          "_xsrf=j8vvHWuS7l3DagaJdE6uikwuXwXy622h; _zap=b32a2299-27aa-43d4-9d0d-f97a96d26fe2; Hm_lvt_98beee57fd2ef70ccdd5ca52b9740c49=1713682226; d_c0=ANAVUJLufxiPToOKmAZ1ZqzL1ZQvwSKEitM=|1713682226; __snaker__id=2ZGBVJvcXhgREI1r; captcha_session_v2=2|1:0|10:1713868386|18:captcha_session_v2|88:RG10Z3hiaU01N1N4NkNuS2syL25QOGVIYTVGYUNndEVROGlUVUFVbnBLMkU3ZitvUnZrRE1rUUZGUlRsRnNEWg==|0f2f08480cb2a391730d7669c297c414ba632761891ead2c12219ed78ecac7ce; gdxidpyhxdE=hCRQrEiS%5C33EDw9Ziq6P02KH6Sg6%2BTDN5ducHrdZrSIXUANcWnvHk2K17wzRAw0JLEX0ErEVzniLSJRKHHi3T0%5CArYbQBX3%2B0DtjsrtylahKSaq9PmC9zscJspwMgcbkc1Q77SJ3nDsvhNM2lctuW6lzUlljAM1YHeKGzaUZrKNZGqz%5C%3A1714147925134; SESSIONID=7lHa3aCMlBnVNUQaF4vFscNXZvaxjZWocyWLS4qs4Tx; JOID=UV8UBktZ-xGuhwMyXV6MDmuG9LVHapFdyrdmdxQ2vXn8zFVnOqk3O86AATBc1M-erlXg8DXaxV91XXK6y5T0Q4s=; osd=VVEVC05d9RCjggc8XFOJCmWH-bBDZJBQz7NodhkzuXf9wVBjNKg6PsqOAD1Z0MGfo1Dk_jTXwFt7XH-_z5r1To4=; Hm_lpvt_98beee57fd2ef70ccdd5ca52b9740c49=1714147101; KLBRSID=37f2e85292ebb2c2ef70f1d8e39c2b34|1714147102|1714147056",
+      },
+      dataType: "text",
+    });
+    return zhihuHandle.call(this, result.data);;
   }
 }
 module.exports = NewsService;
