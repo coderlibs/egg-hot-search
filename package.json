@@ -1,7 +1,7 @@
 {
-  "name": "coderlibs-api-server",
+  "name": "egg-hot-search",
   "version": "1.0.0",
-  "description": "公共接口热门爬虫服务",
+  "description": "热搜爬虫服务",
   "main": "index.js",
   "scripts": {
     "start": "export NODE_ENV=production&&egg-bin dev",
@@ -11,11 +11,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/weisonglei/coderlibs-api-server.git"
+    "url": "https://github.com/coderlibs/egg-hot-search.git"
   },
-  "keywords": [],
+  "keywords": [
+    "egg-hot-search",
+    "hot",
+    "search",
+    "微博热搜",
+    "百度热搜",
+    "头条热搜",
+    "知乎热搜",
+    "CSDN热搜"
+  ],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coderlibs/egg-hot-search/issues"
+  },
+  "homepage": "https://github.com/coderlibs/egg-hot-search#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "egg": "^3.6.0",
