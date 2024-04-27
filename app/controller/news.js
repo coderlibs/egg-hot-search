@@ -19,5 +19,12 @@ class NewsController extends Controller {
       list,
     };
   }
+  // 百度页面
+  async baidu() {
+    const { ctx } = this;
+    let list = [];
+    list = this.app.cache.baidu || [];
+    await ctx.render("baidu", { list });
+  }
 }
 module.exports = NewsController;

@@ -1,4 +1,5 @@
 const weiboHandle = require("../util/weibo");
+const baiduHandle = require("../util/baidu");
 const { Service } = require("egg");
 class NewsService extends Service {
   // 微博爬虫
@@ -15,6 +16,21 @@ class NewsService extends Service {
       dataType: "text",
     });
     return weiboHandle.call(this, result.data);
+  }
+  // 百度爬虫
+  async baidu() {
+    const { ctx } = this;
+    const { baiduNewsListUrl } = this.config.news;
+    const result = await ctx.curl(baiduNewsListUrl, {
+      method: "GET",
+      headers: {
+        cookie:
+          "BIDUPSID=B2114E3DC7779B79B6EEE7FA435D513F; PSTM=1713674825; BAIDUID=B2114E3DC7779B79B6EEE7FA435D513F:FG=1; BAIDUID_BFESS=B2114E3DC7779B79B6EEE7FA435D513F:FG=1; ZFY=rrpomKcY:BVGPHMYaiKwMUP98Akl1DXx4qpdJQk5JsW8:C; BDRCVFR[Zh1eoDf3ZW3]=mk3SLVN4HKm; delPer=0; H_PS_PSSID=40304_40445_40080_60140_40463_60175_60186; PSINO=1; BA_HECTOR=840k000k248k8g248la5ag0k2v0uo21j2ngj91s; H_WISE_SIDS=40304_40445_40080_60140_40463_60175_60186; BDORZ=FFFB88E999055A3F8A630C64834BD6D0",
+        referer: "https://top.baidu.com/board",
+      },
+      dataType: "text",
+    });
+    return baiduHandle.call(this, result.data);
   }
 }
 module.exports = NewsService;
