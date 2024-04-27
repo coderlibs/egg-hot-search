@@ -26,5 +26,17 @@ class NewsController extends Controller {
     list = this.app.cache.baidu || [];
     await ctx.render("baidu", { list });
   }
+  // 百度列表
+  async getBaiduList() {
+    const { ctx } = this;
+    let size = ctx.query.size || 20;
+    let list = [];
+    list = this.app.cache.baidu || [];
+    let maxSize = list.length;
+    list = list.slice(0, maxSize > size ? size : maxSize);
+    ctx.body = {
+      list,
+    };
+  }
 }
 module.exports = NewsController;
