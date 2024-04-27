@@ -19,6 +19,7 @@
                 {% for item in list%}
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        <span>{{item.rank}}.</span>
                         <a class="text-center" href="{{item.url}}" target="_blank">{{item.keyword}}</a>
                         <span style="float: right;color: red;">{{item.hotValue}}</span>
                     </div>
