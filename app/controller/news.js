@@ -76,5 +76,24 @@ class NewsController extends Controller {
       list,
     };
   }
+  // csdn页面
+  async csdn() {
+    const { ctx } = this;
+    let list = [];
+    list = this.app.cache.csdn || [];
+    await ctx.render("csdn", { list });
+  }
+  // CSDN列表
+  async getCsdnList() {
+    const { ctx } = this;
+    let size = ctx.query.size || 20;
+    let list = [];
+    list = this.app.cache.csdn;
+    let maxSize = list.length;
+    list = list.slice(0, maxSize > size ? size : maxSize);
+    ctx.body = {
+      list,
+    };
+  }
 }
 module.exports = NewsController;

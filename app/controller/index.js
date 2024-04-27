@@ -7,6 +7,7 @@ class IndexController extends Controller {
       { link: "/baidu", name: "百度热搜" },
       { link: "/toutiao", name: "头条热搜" },
       { link: "/zhihu", name: "知乎热搜" },
+      { link: "/csdn", name: "CSDN热搜" },
     ];
     await ctx.render("index", { list });
   }

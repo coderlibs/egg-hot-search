@@ -9,4 +9,6 @@ module.exports = (app)=>{
     router.get('/getToutiaoList', controller.news.getToutiaoList);
     router.get('/zhihu', controller.news.zhihu);
     router.get('/getZhihuList', controller.news.getZhihuList);
+    router.get('/csdn', controller.news.csdn);
+    router.get('/getCsdnList', controller.news.getCsdnList);
 }

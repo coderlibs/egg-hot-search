@@ -67,5 +67,25 @@ class NewsService extends Service {
     });
     return zhihuHandle.call(this, result.data);;
   }
+  // CSDN爬虫
+  async csdn() {
+    const { ctx } = this;
+    const { csdnNewsListUrl } = this.config.news;
+    const result = await ctx.curl(csdnNewsListUrl, {
+      method: "GET",
+      dataType: "json",
+    });
+    let list = result.data.data;
+    let arr = []
+    list.forEach((el,index) => {
+      arr.push({
+        rank: index + 1,
+        keyword: el.articleTitle,
+        url:  el.articleDetailUrl,
+        hotValue: el.hotRankScore,
+      });
+    });
+    return arr;
+  }
 }
 module.exports = NewsService;
