@@ -4,6 +4,7 @@ class IndexController extends Controller {
     const { ctx } = this;
     let list = [
       { link: "/weibo", name: "微博热搜" },
+      { link: "/baidu", name: "百度热搜" },
     ];
     await ctx.render("index", { list });
   }
