@@ -16,7 +16,8 @@ class UpdateCache extends Subscription {
     const weibo = await service.news.weibo();
     const baidu = await service.news.baidu();
     const toutiao = await service.news.toutiao();
-    this.ctx.app.cache = { weibo, baidu, toutiao };
+    const zhihu = await service.news.zhihu();
+    this.ctx.app.cache = { weibo, baidu, toutiao, zhihu };
   }
 }
 
