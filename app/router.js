@@ -5,4 +5,6 @@ module.exports = (app)=>{
     router.get('/getWeiboList', controller.news.getWeiboList);
     router.get('/baidu', controller.news.baidu);
     router.get('/getBaiduList', controller.news.getBaiduList);
+    router.get('/toutiao', controller.news.toutiao);
+    router.get('/getToutiaoList', controller.news.getToutiaoList);
 }

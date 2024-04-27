@@ -32,5 +32,25 @@ class NewsService extends Service {
     });
     return baiduHandle.call(this, result.data);
   }
+    // 头条爬虫
+    async toutiao() {
+      const { ctx } = this;
+      const { toutiaoNewsListUrl } = this.config.news;
+      const result = await ctx.curl(toutiaoNewsListUrl, {
+        method: "GET",
+        dataType: "json",
+      });
+      let list = result.data.data;
+      let arr = []
+      list.forEach((el,index) => {
+        arr.push({
+          rank: index + 1,
+          keyword: el.Title,
+          url:  el.Url,
+          hotValue: el.HotValue,
+        });
+      });
+      return arr;
+    }
 }
 module.exports = NewsService;

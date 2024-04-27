@@ -38,5 +38,24 @@ class NewsController extends Controller {
       list,
     };
   }
+  // 头条页面
+  async toutiao() {
+    const { ctx } = this;
+    let list = [];
+    list = this.app.cache.toutiao || [];
+    await ctx.render("toutiao", { list });
+  }
+  // 头条列表
+  async getToutiaoList() {
+    const { ctx } = this;
+    let size = ctx.query.size || 20;
+    let list = [];
+    list = this.app.cache.toutiao;
+    let maxSize = list.length;
+    list = list.slice(0, maxSize > size ? size : maxSize);
+    ctx.body = {
+      list,
+    };
+  }
 }
 module.exports = NewsController;
